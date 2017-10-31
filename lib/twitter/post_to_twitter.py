@@ -18,6 +18,6 @@ tweetID = read_status(TWITTER_SETTINGS.get('username'))
 def update_status(username):
     print("ID's already tweeted:", twitter_ids)
     ratings = get_data(CSV_URL)
-    tweet = "Your latest approval rating from Gallup is {0}% \n{1} ".format(ratings, retweet_status(username))
+    tweet = "@realDonaldTrump's latest approval rating from Gallup is {0}% \n{1} ".format(ratings, retweet_status(username))
     api.update_status(tweet)
     print("Tweet posted!")
