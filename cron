@@ -1,0 +1,1 @@
+30 * * * * /home/trumpratings/virtual/trumpratings/bin/python /home/trumpratings/trumpratings/job_runner.py
