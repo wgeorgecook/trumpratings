@@ -11,3 +11,5 @@ log/
 .distlib
 .bash_history
 python3_env
+.ipython
+.pip
