@@ -10,3 +10,4 @@ log/
 .cache
 .distlib
 .bash_history
+python3_env
