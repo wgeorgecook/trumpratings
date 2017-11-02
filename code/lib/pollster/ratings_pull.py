@@ -51,12 +51,14 @@ class DataRead(object):
             print(approval_is.format(approval))
             return approval
         except TypeError:
-            fresh_gallup = (df.query(query_string.format(yesterday_date)))
-            approval = int(fresh_gallup.approve)
-            print(approval_is.format(approval))
-            return approval
-        else:
-            fresh_gallup = (df.query(query_string.format(two_days_date)))
-            approval = int(fresh_gallup.approve)
-            print(approval_is.format(approval))
-            return approval
+            try:
+                fresh_gallup = (df.query(query_string.format(yesterday_date)))
+                approval = int(fresh_gallup.approve)
+                print(approval_is.format(approval))
+                return approval
+            except TypeError:
+                fresh_gallup = (df.query(query_string.format(two_days_date)))
+                approval = int(fresh_gallup.approve)
+                print(approval_is.format(approval))
+                return approval
+            

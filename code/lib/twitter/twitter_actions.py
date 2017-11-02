@@ -15,7 +15,7 @@ api = tweepy.API(auth)
 tweeter = TWITTER_SETTINGS.get('username')
 timestamp = datetime.now().strftime("%m/%d/%Y %H:%M")
 reading = DataRead()
-
+twitter_ids = []
 
 class Twinterface(object):
     def __init__(self):
@@ -39,7 +39,7 @@ class Twinterface(object):
     def retweet_status(self, username):
         tweetID = self.read_status(username)
         retweet_url = "https://twitter.com/{0}/status/{1}".format(username, tweetID)
-        Twinterface.update_id_list(tweetID, username)
+        self.update_id_list(tweetID, username)
         return retweet_url
 
     def update_status(self, username, CSV_URL):
