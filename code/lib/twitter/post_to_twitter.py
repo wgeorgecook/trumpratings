@@ -4,22 +4,29 @@
 
 import tweepy
 from datetime import datetime
-from settings import CONSUMER_SETTINGS, ACCESS_SETTINGS, TWITTER_SETTINGS
-from lib.pollster.ratings_pull import get_data, CSV_URL
-from lib.twitter.read_from_twitter import retweet_status, read_status, twitter_ids
+from settings import *
+from lib.pollster.ratings_pull import DataRead
+from lib.twitter.read_from_twitter import Twinterface
 
 
 auth = tweepy.OAuthHandler(CONSUMER_SETTINGS.get('consumer_key'), CONSUMER_SETTINGS.get('consumer_secret'))
 auth.set_access_token(ACCESS_SETTINGS.get('access_token'), ACCESS_SETTINGS.get('access_secret'))
-
+tweeter = TWITTER_SETTINGS.get('username')
 api = tweepy.API(auth)
 
 timestamp = datetime.now().strftime("%m/%d/%Y %H:%M")
-tweetID = read_status(TWITTER_SETTINGS.get('username'))
+tweetID = Twinterface.read_status(tweeter)
 
-def update_status(username):
-    print("Time is: ", timestamp) 
-    ratings = get_data(CSV_URL)
-    tweet = ".@realDonaldTrump's latest approval rating from Gallup is {0}% \n{1} ".format(ratings, retweet_status(username))
-    api.update_status(tweet)
-    print("Tweet posted!")
+class UpdateTwitter(object):
+    def __init__(self):
+        self.auth = auth
+        self.api = api
+        self.timestamp = timestamp
+        self.tweetID = tweetID
+
+    def update_status(self, username):
+        print("############# Time is: ", timestamp, ' #############')
+        ratings = DataRead.get_data(CSV_URL)
+        tweet = ".@realDonaldTrump's latest approval rating from Gallup is {0}% \n{1} ".format(ratings, retweet_status(username))
+        api.update_status(tweet)
+        print("############# Tweet posted! #############")

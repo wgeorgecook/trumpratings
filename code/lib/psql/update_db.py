@@ -1,12 +1,34 @@
 # Uses PeeWee to update DB with Twitter IDs
 from peewee import *
+from settings import *
 
 
-db = PostgresqlDatabase(
-    'trumpratings',  # Required by Peewee.
-    user='trumpuser',  # Will be passed directly to psycopg2.
-    password='TempPa55',  # Ditto.
-    host='127.0.0.1:5432',  # Ditto.
-)
+psql_db = PostgresqlDatabase(
+    'trumpratings',
+    user='trumpuser',
+    password='TempPa55',
+    host='localhost',
+    )
 
-psql_db = PostgresqlDatabase('trumpratings', user='trumpuser')
+
+class DB(object):
+
+    def __init__(self):
+        self.db = db
+        self.db.connect()
+
+    def search_id(self):
+        Twitter_info.get(Twitter_info.tweet_id ==
+
+
+class BaseModel(Model):
+    """A base model that will use our Postgresql database"""
+    class Meta:
+        database = psql_db
+
+class User(BaseModel):
+    username = CharField()
+
+class Twitter_info(BaseModel):
+    tweet_id = IntegerField(default=0)
+    date_posted = CharField(maxlength=50)
