@@ -1,1 +1,1 @@
-*/5 * * * * /Users/williamcook/Documents/Python/virtuals/trumpratings/bin/python3 /Users/williamcook/Documents/Python/trumpratings/job_runner.py > /Users/williamcook/Documents/Python/trumpratings/log/cronlog.log 2>&1
+*/5 * * * * /home/vagrant/python3_env/bin/python3 /home/vagrant/code/job_runner.py >> /home/vagrant/logs/cronlog.log 2>&1
