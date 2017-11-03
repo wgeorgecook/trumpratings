@@ -27,10 +27,12 @@ class DataRead(object):
 
         # Necessary variables, comments just for chunking
         """Pandas variables"""
-        url = CSV_URL
+        url = self.CSV_URL
         df = pd.read_csv(url)
         approval_is = "############# Approval is: {} #############"
-        query_string ='subgroup == "All polls" & pollster == "Gallup" & approve > 0 & createddate == "{}"'
+        approval_string ='subgroup == "All polls" & pollster == "Gallup" & approve > 0 & createddate == "{}"'
+        disapproval_string ='subgroup == "All polls" & pollster == "Gallup" & disapprove > 0 & createddate == "{}"'
+        disapproval_is = "Disapproval is: {} #############"
         """Time variables""" # TODO: Is there a better way to do this?
 
         today = date.today()
@@ -42,23 +44,40 @@ class DataRead(object):
         two_days = date.today() - timedelta(2)
         two_days_date = two_days.strftime("%m/%d/%Y")
 
+        three_days = date.today() - timedelta(3)
+        three_days_date = three_days.strftime("%m/%d/%Y")
+
 
         # End variables
 
         try:
-            fresh_gallup = (df.query(query_string.format(today_date)))
-            approval = int(fresh_gallup.approve)
-            print(approval_is.format(approval))
-            return approval
+            approve_gallup = (df.query(approval_string.format(today_date)))
+            disapprove_gallup = (df.query(disapproval_string.format(today_date)))
+            approval = int(approve_gallup.approve)
+            disapproval = int(disapprove_gallup.disapprove)
+            print(approval_is.format(approval), disapproval_is.format(disapproval))
+            return approval, disapproval
         except TypeError:
             try:
-                fresh_gallup = (df.query(query_string.format(yesterday_date)))
-                approval = int(fresh_gallup.approve)
-                print(approval_is.format(approval))
-                return approval
+                approve_gallup = (df.query(approval_string.format(yesterday_date)))
+                disapprove_gallup = (df.query(disapproval_string.format(yesterday_date)))
+                approval = int(approve_gallup.approve)
+                disapproval = int(disapprove_gallup.disapprove)
+                print(approval_is.format(approval), disapproval_is.format(disapproval))
+
+                return approval, disapproval
             except TypeError:
-                fresh_gallup = (df.query(query_string.format(two_days_date)))
-                approval = int(fresh_gallup.approve)
-                print(approval_is.format(approval))
-                return approval
-            
+                try:
+                    approve_gallup = (df.query(approval_string.format(two_days_date)))
+                    disapprove_gallup = (df.query(disapproval_string.format(two_days_date)))
+                    approval = int(approve_gallup.approve)
+                    disapproval = int(disapprove_gallup.disapprove)
+                    print(approval_is.format(approval), disapproval_is.format(disapproval))
+                    return approval, disapproval
+                except TypeError:
+                    approve_gallup = (df.query(approval_string.format(three_days_date)))
+                    disapprove_gallup = (df.query(disapproval_string.format(three_days_date)))
+                    approval = int(approve_gallup.approve)
+                    disapproval = int(disapprove_gallup.disapprove)
+                    print(approval_is.format(approval), disapproval_is.format(disapproval))
+                    return approval, disapproval

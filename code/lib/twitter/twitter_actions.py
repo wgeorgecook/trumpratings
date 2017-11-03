@@ -27,7 +27,7 @@ class Twinterface(object):
         self.reading = reading
 
     def read_status(self, username):
-        user_tweets = api.user_timeline(id=username, count=1)
+        user_tweets = self.api.user_timeline(id=username, count=1)
         for tweet in user_tweets:
             return tweet.id
 
@@ -44,7 +44,8 @@ class Twinterface(object):
 
     def update_status(self, username, CSV_URL):
         print("############# Time is: ", timestamp, ' #############')
-        ratings = reading.get_data(CSV_URL)
-        tweet = ".@realDonaldTrump's latest approval rating from Gallup is {0}% \n{1} ".format(ratings, self.retweet_status(username))
-        api.update_status(tweet)
+        approve = reading.get_data(CSV_URL)[0]
+        disapprove = reading.get_data(CSV_URL)[1]
+        tweet = "Latest @realDonaldTrump, @POTUS Gallup approval rating is {0}%. Disapproval rating is {1}%. \n{2} ".format(approve, disapprove, self.retweet_status(username))
+        self.api.update_status(tweet)
         print("############# Tweet posted! #############")
