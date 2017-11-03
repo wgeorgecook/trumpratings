@@ -31,21 +31,23 @@ class Twinterface(object):
         for tweet in user_tweets:
             return tweet.id
 
-    def update_id_list(self, tweet_ID, username):
+    def get_tweet_id(self, username):
         tweet_ID = self.read_status(username)
-        if tweet_ID not in twitter_ids:
-            twitter_ids.insert(0, tweet_ID)
+        return tweet_ID
 
-    def retweet_status(self, username):
+    def get_tweet_url(self, username):
         tweetID = self.read_status(username)
-        retweet_url = "https://twitter.com/{0}/status/{1}".format(username, tweetID)
-        self.update_id_list(tweetID, username)
-        return retweet_url
+        tweet_url = "https://twitter.com/{0}/status/{1}".format(username, tweetID)
+        self.get_tweet_id(username)
+        return tweet_url
 
     def update_status(self, username, CSV_URL):
         print("############# Time is: ", timestamp, ' #############')
         approve = reading.get_data(CSV_URL)[0]
         disapprove = reading.get_data(CSV_URL)[1]
         tweet = "Latest @realDonaldTrump, @POTUS Gallup approval rating is {0}%. Disapproval rating is {1}%. \n{2} ".format(approve, disapprove, self.retweet_status(username))
-        self.api.update_status(tweet)
+        # self.api.update_status(tweet)
+        print("Tweeting currently turned off")
+        print("Virtual tweet:")
+        print(tweet)
         print("############# Tweet posted! #############")
