@@ -1,6 +1,7 @@
 settings.py
 __pycache__
 log/
+logs/
 .vagrant
 *.lock
 .DS_store
@@ -13,3 +14,4 @@ log/
 python3_env
 .ipython
 .pip
+.selected_editor

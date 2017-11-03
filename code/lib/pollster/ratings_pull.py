@@ -17,21 +17,21 @@ class DataRead(object):
         self.CSV_URL = CSV_URL
 
     def get_data(self, CSV_URL):
-        with requests.Session() as s:
-            download = s.get(CSV_URL)
-
-            decoded_content = download.content.decode('utf-8')
-
-            cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-            my_list = list(cr)
+        # with requests.Session() as s:
+        #     download = s.get(CSV_URL)
+        #
+        #     decoded_content = download.content.decode('utf-8')
+        #
+        #     cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+        #     my_list = list(cr)
 
         # Necessary variables, comments just for chunking
         """Pandas variables"""
         url = self.CSV_URL
         df = pd.read_csv(url)
         approval_is = "############# Approval is: {} #############"
-        approval_string ='subgroup == "All polls" & pollster == "Gallup" & approve > 0 & createddate == "{}"'
-        disapproval_string ='subgroup == "All polls" & pollster == "Gallup" & disapprove > 0 & createddate == "{}"'
+        approval_string ='subgroup == "All polls" & pollster == "Gallup" & enddate == "{}"'
+        disapproval_string ='subgroup == "All polls" & pollster == "Gallup" & enddate == "{}"'
         disapproval_is = "Disapproval is: {} #############"
         """Time variables""" # TODO: Is there a better way to do this?
 
