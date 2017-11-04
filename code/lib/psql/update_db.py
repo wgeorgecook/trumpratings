@@ -61,3 +61,4 @@ class DB(object):
                 self.close_connection()
         except:
             return False
+            self.close_connection()
