@@ -6,12 +6,6 @@ from lib.psql.models import Twitter_info
 # from lib.twitter.twitter_actions import Twinterface
 
 
-# twitter = Twinterface()
-# username = TWITTER_SETTINGS.get('username')
-# tweet_ID = twitter.get_tweet_id(username)
-# twitter_url = twitter.get_tweet_url(username)
-# date_posted = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-
 dbconnection = DB_SETTINGS.get('db')
 dbuser = DB_SETTINGS.get('user')
 dbpass = DB_SETTINGS.get('password')
