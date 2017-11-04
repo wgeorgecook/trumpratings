@@ -19,16 +19,15 @@ psql_db = PostgresqlDatabase(
     )
 
 
-
 class DB(object):
 
-    def __init__(self):
+    def __init__(self, username, tweet_ID, twitter_url):
 
         self.db = psql_db
-        self.username = TWITTER_SETTINGS.get('username')
-        self.tweet_ID = twitter.get_tweet_id(username)
+        self.username = username
+        self.tweet_ID = tweet_ID
         self.date_posted = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-        self.twitter_url = twitter.get_tweet_url(username)
+        self.twitter_url = twitter_url
 
     def open_connection(self):
         self.db.connect()
@@ -41,11 +40,17 @@ class DB(object):
     def rollback_txn(self):
         self.db.rollback()
 
-    def post_tweet_info(self, username, tweet_ID, date_posted, twitter_url):
-        if self.search_tweets(tweet_ID) == False:
+    def post_tweet_info(self):
+        if self.search_tweets(self.tweet_ID) is False:
             self.open_connection()
-            posting = Twitter_info(name = self.username, tweet_id = self.tweet_ID, date_posted = self.date_posted, twitter_url = self.twitter_url)
+            posting = Twitter_info(
+                name=self.username,
+                tweet_id=self.tweet_ID,
+                date_posted=self.date_posted,
+                twitter_url=self.twitter_url)
+
             posting.save()
+
             self.close_connection()
 
     def search_tweets(self, tweet_ID):
