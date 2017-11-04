@@ -57,9 +57,8 @@ class Twinterface(object):
             approve = ratings[0]
             disapprove = ratings[1]
             tweet = "Latest @realDonaldTrump, @POTUS Gallup approval rating is {0}%. Disapproval rating is {1}%. \n{2} ".format(approve, disapprove, self.get_tweet_url(username))
-            # self.api.update_status(tweet)
-            print("Tweeting currently turned off")
-            print("Virtual tweet:")
+            self.api.update_status(tweet)
+            print("Virtual tweet preview:")
             print(tweet)
             print("############# Tweet posted! #############")
             data.post_tweet_info()
