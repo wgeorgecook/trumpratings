@@ -21,6 +21,7 @@ psql_db = PostgresqlDatabase(
 
 class DB(object):
 
+
     def __init__(self, username, tweet_ID, twitter_url):
 
         self.db = psql_db
@@ -55,7 +56,6 @@ class DB(object):
 
     def search_tweets(self, tweet_ID):
         try:
-            self.open_connection()
             if Twitter_info.get(Twitter_info.tweet_id == tweet_ID):
                 return True
                 self.close_connection()

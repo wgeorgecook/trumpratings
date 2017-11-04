@@ -53,13 +53,15 @@ class Twinterface(object):
 
         if data.search_tweets(tweet_ID) is False:
             print("############# Time is: ", self.timestamp, ' #############')
-            approve = self.reading.get_data(CSV_URL)[0]
-            disapprove = self.reading.get_data(CSV_URL)[1]
-            tweet = "Latest @realDonaldTrump, @POTUS Gallup approval rating is {0}%. Disapproval rating is {1}%. \n{2} ".format(approve, disapprove, self.get_tweet_id(username))
+            ratings = self.reading.get_data(CSV_URL)
+            approve = ratings[0]
+            disapprove = ratings[1]
+            tweet = "Latest @realDonaldTrump, @POTUS Gallup approval rating is {0}%. Disapproval rating is {1}%. \n{2} ".format(approve, disapprove, self.get_tweet_url(username))
             # self.api.update_status(tweet)
             print("Tweeting currently turned off")
             print("Virtual tweet:")
             print(tweet)
             print("############# Tweet posted! #############")
+            data.post_tweet_info()
         else:
             print("############# Tweet already posted! Will not update! #############")

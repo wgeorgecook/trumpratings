@@ -11,8 +11,8 @@ from datetime import datetime, timedelta, date
 
 CSV_URL = 'https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv'
 
-
 class DataRead(object):
+
     def __init__(self):
         self.CSV_URL = CSV_URL
 
@@ -36,16 +36,19 @@ class DataRead(object):
         """Time variables""" # TODO: Is there a better way to do this?
 
         today = date.today()
-        today_date = today.strftime("%m/%d/%Y")
+        today_date = today.strftime("%m/%-d/%Y")
 
         yesterday = date.today() - timedelta(1)
-        yesterday_date = yesterday.strftime("%m/%d/%y")
+        yesterday_date = yesterday.strftime("%m/%-d/%Y")
 
         two_days = date.today() - timedelta(2)
-        two_days_date = two_days.strftime("%m/%d/%y")
+        two_days_date = two_days.strftime("%m/%-d/%Y")
 
         three_days = date.today() - timedelta(3)
-        three_days_date = three_days.strftime("%m/%d/%y")
+        three_days_date = three_days.strftime("%m/%-d/%Y")
+
+        four_days = date.today() - timedelta(4)
+        four_days_date = three_days.strftime("%m/%-d/%Y")
 
 
         # End variables
@@ -56,7 +59,8 @@ class DataRead(object):
             approval = int(approve_gallup.approve)
             disapproval = int(disapprove_gallup.disapprove)
             print(approval_is.format(approval), disapproval_is.format(disapproval))
-            return approval, disapproval
+            return approval
+            return disapproval
         except TypeError:
             try:
                 approve_gallup = (df.query(approval_string.format(yesterday_date)))
@@ -64,8 +68,8 @@ class DataRead(object):
                 approval = int(approve_gallup.approve)
                 disapproval = int(disapprove_gallup.disapprove)
                 print(approval_is.format(approval), disapproval_is.format(disapproval))
+                return [approval, disapproval]
 
-                return approval, disapproval
             except TypeError:
                 try:
                     approve_gallup = (df.query(approval_string.format(two_days_date)))
@@ -73,7 +77,8 @@ class DataRead(object):
                     approval = int(approve_gallup.approve)
                     disapproval = int(disapprove_gallup.disapprove)
                     print(approval_is.format(approval), disapproval_is.format(disapproval))
-                    return approval, disapproval
+                    return [approval, disapproval]
+
                 except TypeError:
                     try:
                         approve_gallup = (df.query(approval_string.format(three_days_date)))
@@ -81,8 +86,13 @@ class DataRead(object):
                         approval = int(approve_gallup.approve)
                         disapproval = int(disapprove_gallup.disapprove)
                         print(approval_is.format(approval), disapproval_is.format(disapproval))
-                        return approval, disapproval
+                        return [approval, disapproval]
+
                     except TypeError:
-                        approval = "NoData"
-                        disapproval = "NoData"
-                        return approval, disapproval
+                        approve_gallup = (df.query(approval_string.format(four_days_date)))
+                        disapprove_gallup = (df.query(disapproval_string.format(four_days_date)))
+                        approval = int(approve_gallup.approve)
+                        disapproval = int(disapprove_gallup.disapprove)
+                        print(approval_is.format(approval), disapproval_is.format(disapproval))
+                        return [approval, disapproval]
+                        
