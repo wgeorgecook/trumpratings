@@ -2,8 +2,9 @@
 from peewee import *
 from settings import *
 from datetime import datetime
-from lib.twitter.twitter_actions import Twinterface
 from lib.psql.models import Twitter_info
+from lib.twitter.twitter_actions import Twinterface
+
 
 twitter = Twinterface()
 username = TWITTER_SETTINGS.get('username')
