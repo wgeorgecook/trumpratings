@@ -3,14 +3,14 @@ from peewee import *
 from settings import *
 from datetime import datetime
 from lib.psql.models import Twitter_info
-from lib.twitter.twitter_actions import Twinterface
+# from lib.twitter.twitter_actions import Twinterface
 
 
-twitter = Twinterface()
-username = TWITTER_SETTINGS.get('username')
-tweet_ID = twitter.get_tweet_id(username)
-twitter_url = twitter.get_tweet_url(username)
-date_posted = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+# twitter = Twinterface()
+# username = TWITTER_SETTINGS.get('username')
+# tweet_ID = twitter.get_tweet_id(username)
+# twitter_url = twitter.get_tweet_url(username)
+# date_posted = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
 
 dbconnection = DB_SETTINGS.get('db')
 dbuser = DB_SETTINGS.get('user')
@@ -29,11 +29,12 @@ psql_db = PostgresqlDatabase(
 class DB(object):
 
     def __init__(self):
+
         self.db = psql_db
-        self.username = username
-        self.tweet_ID = tweet_ID
-        self.date_posted = date_posted
-        self.twitter_url = twitter_url
+        self.username = TWITTER_SETTINGS.get('username')
+        self.tweet_ID = twitter.get_tweet_id(username)
+        self.date_posted = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+        self.twitter_url = twitter.get_tweet_url(username)
 
     def open_connection(self):
         self.db.connect()
@@ -59,5 +60,3 @@ class DB(object):
                 return True
         except:
             return False
-
-data = DB()

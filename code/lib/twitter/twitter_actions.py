@@ -1,32 +1,35 @@
-#! /usr/bin/python3
-
 # All the tweepy stuff
 
 import tweepy
 from lib.pollster.ratings_pull import DataRead, CSV_URL
-from lib.psql.update_db import DB
 from datetime import datetime
 from settings import *
+from lib.psql.update_db import DB
 
 
-auth = tweepy.OAuthHandler(CONSUMER_SETTINGS.get('consumer_key'), CONSUMER_SETTINGS.get('consumer_secret'))
-auth.set_access_token(ACCESS_SETTINGS.get('access_token'), ACCESS_SETTINGS.get('access_secret'))
+# auth = tweepy.OAuthHandler(CONSUMER_SETTINGS.get('consumer_key'), CONSUMER_SETTINGS.get('consumer_secret'))
+# auth.set_access_token(ACCESS_SETTINGS.get('access_token'), ACCESS_SETTINGS.get('access_secret'))
 
-api = tweepy.API(auth)
-tweeter = TWITTER_SETTINGS.get('username')
-timestamp = datetime.now().strftime("%m/%d/%Y %H:%M")
-reading = DataRead()
-data = DB()
+# api = tweepy.API(auth)
+# tweeter = TWITTER_SETTINGS.get('username')
+# timestamp = datetime.now().strftime("%m/%d/%Y %H:%M")
+# reading = DataRead()
+# data = DB(username = username, tweet_ID = tweet_ID, date_posted = date_posted, twitter_url = twitter_url)
 
 
 class Twinterface(object):
     def __init__(self):
-        self.api = api
-        self.auth = auth
-        self.tweeter = tweeter
-        self.timestamp = timestamp
+
+        reading = DataRead()
+        self.auth = tweepy.OAuthHandler(CONSUMER_SETTINGS.get('consumer_key'), CONSUMER_SETTINGS.get('consumer_secret'))
+        self.auth.set_access_token(ACCESS_SETTINGS.get('access_token'), ACCESS_SETTINGS.get('access_secret'))
+        self.tweeter = TWITTER_SETTINGS.get('username')
+        self.timestamp = datetime.now().strftime("%m/%d/%Y %H:%M")
         self.CSV_URL = CSV_URL
         self.reading = reading
+        self.api = tweepy.API(self.auth)
+        data = DB(username = username, tweet_ID = tweet_ID, date_posted = date_posted, twitter_url = twitter_url)
+
 
     def read_status(self, username):
         user_tweets = self.api.user_timeline(id=username, count=1)
