@@ -55,7 +55,9 @@ class DB(object):
 
     def search_tweets(self, tweet_ID):
         try:
+            self.open_connection()
             if Twitter_info.get(Twitter_info.tweet_id == tweet_ID):
                 return True
+                self.close_connection()
         except:
             return False

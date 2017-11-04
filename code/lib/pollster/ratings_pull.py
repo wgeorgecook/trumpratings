@@ -39,13 +39,13 @@ class DataRead(object):
         today_date = today.strftime("%m/%d/%Y")
 
         yesterday = date.today() - timedelta(1)
-        yesterday_date = yesterday.strftime("%m/%d/%Y")
+        yesterday_date = yesterday.strftime("%m/%d/%y")
 
         two_days = date.today() - timedelta(2)
-        two_days_date = two_days.strftime("%m/%d/%Y")
+        two_days_date = two_days.strftime("%m/%d/%y")
 
         three_days = date.today() - timedelta(3)
-        three_days_date = three_days.strftime("%m/%d/%Y")
+        three_days_date = three_days.strftime("%m/%d/%y")
 
 
         # End variables
@@ -75,9 +75,14 @@ class DataRead(object):
                     print(approval_is.format(approval), disapproval_is.format(disapproval))
                     return approval, disapproval
                 except TypeError:
-                    approve_gallup = (df.query(approval_string.format(three_days_date)))
-                    disapprove_gallup = (df.query(disapproval_string.format(three_days_date)))
-                    approval = int(approve_gallup.approve)
-                    disapproval = int(disapprove_gallup.disapprove)
-                    print(approval_is.format(approval), disapproval_is.format(disapproval))
-                    return approval, disapproval
+                    try:
+                        approve_gallup = (df.query(approval_string.format(three_days_date)))
+                        disapprove_gallup = (df.query(disapproval_string.format(three_days_date)))
+                        approval = int(approve_gallup.approve)
+                        disapproval = int(disapprove_gallup.disapprove)
+                        print(approval_is.format(approval), disapproval_is.format(disapproval))
+                        return approval, disapproval
+                    except TypeError:
+                        approval = "NoData"
+                        disapproval = "NoData"
+                        return approval, disapproval
