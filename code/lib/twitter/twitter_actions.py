@@ -7,17 +7,15 @@ from settings import *
 from lib.psql.update_db import DB
 
 
-# auth = tweepy.OAuthHandler(CONSUMER_SETTINGS.get('consumer_key'), CONSUMER_SETTINGS.get('consumer_secret'))
-# auth.set_access_token(ACCESS_SETTINGS.get('access_token'), ACCESS_SETTINGS.get('access_secret'))
-
-
-
-#
-# reading = DataRead()
-# data = DB(username = username, tweet_ID = tweet_ID, date_posted = date_posted, twitter_url = twitter_url)
-
 
 class Twinterface(object):
+    """
+    Uses Tweepy library to interface with all things Twitter. Gathers
+    info such as the President's last tweet ID, the full URL
+    for the Preseident's last tweet, and finally will
+    make the write call to the Twitter API.
+    """
+
     def __init__(self):
 
         self.auth = tweepy.OAuthHandler(CONSUMER_SETTINGS.get('consumer_key'), CONSUMER_SETTINGS.get('consumer_secret'))
@@ -63,4 +61,5 @@ class Twinterface(object):
             print("############# Tweet posted! #############")
             data.post_tweet_info()
         else:
+            print("############# Time is: ", self.timestamp, ' #############')
             print("############# Tweet already posted! Will not update! #############")

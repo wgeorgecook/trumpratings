@@ -1,4 +1,3 @@
-#! /usr/bin/python
 
 # Pulls ratings from Pollster
 
@@ -13,28 +12,29 @@ CSV_URL = 'https://projects.fivethirtyeight.com/trump-approval-data/approval_pol
 
 class DataRead(object):
 
+    """
+    Streams the CSV with relevant polling data.
+    Searches for most recent polling data from Gallup
+    by starting for an end date of today and going
+    backwards a day at a time until valid data returned
+    """
+
     def __init__(self):
         self.CSV_URL = CSV_URL
 
     def get_data(self, CSV_URL):
-        # with requests.Session() as s:
-        #     download = s.get(CSV_URL)
-        #
-        #     decoded_content = download.content.decode('utf-8')
-        #
-        #     cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-        #     my_list = list(cr)
+
 
         # Necessary variables, comments just for chunking
-        """Pandas variables"""
+        # Pandas variables
         url = self.CSV_URL
         df = pd.read_csv(url)
         approval_is = "############# Approval is: {} #############"
         approval_string ='subgroup == "All polls" & pollster == "Gallup" & enddate == "{}"'
         disapproval_string ='subgroup == "All polls" & pollster == "Gallup" & enddate == "{}"'
         disapproval_is = "Disapproval is: {} #############"
-        """Time variables""" # TODO: Is there a better way to do this?
 
+        # Timestamp variables
         today = date.today()
         today_date = today.strftime("%m/%-d/%Y")
 
@@ -49,9 +49,12 @@ class DataRead(object):
 
         four_days = date.today() - timedelta(4)
         four_days_date = three_days.strftime("%m/%-d/%Y")
+        # End timestamp variables
 
-
-        # End variables
+        # Try/except blocks will go back in time a day at a time
+        # iterating over the CSV with polling data until
+        # valid data is returned.
+        # TODO: Is there a better way to do this?
 
         try:
             approve_gallup = (df.query(approval_string.format(today_date)))
@@ -95,4 +98,3 @@ class DataRead(object):
                         disapproval = int(disapprove_gallup.disapprove)
                         print(approval_is.format(approval), disapproval_is.format(disapproval))
                         return [approval, disapproval]
-                        

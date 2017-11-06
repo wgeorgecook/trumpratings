@@ -3,7 +3,7 @@ from peewee import *
 from settings import *
 from datetime import datetime
 from lib.psql.models import Twitter_info
-# from lib.twitter.twitter_actions import Twinterface
+
 
 
 dbconnection = DB_SETTINGS.get('db')
@@ -20,7 +20,14 @@ psql_db = PostgresqlDatabase(
 
 
 class DB(object):
+    """
+    Connects to a Postgresl database.
+    Can search database for tweet ID's and passes
+    true/false to Twinterface object. Will also
+    update DB with relevant Twitter data after
+    posting tweet via Twinterface object.
 
+    """
 
     def __init__(self, username, tweet_ID, twitter_url):
 
