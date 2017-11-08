@@ -5,6 +5,7 @@ from lib.pollster.ratings_pull import DataRead, CSV_URL
 from datetime import datetime
 from settings import *
 from lib.psql.update_db import DB
+from lib.psql.configure_db import MakeDB
 
 
 
@@ -24,9 +25,10 @@ class Twinterface(object):
         self.timestamp = datetime.now().strftime("%m/%d/%Y %H:%M")
         self.CSV_URL = CSV_URL
         self.reading = DataRead()
+        self.config = MakeDB()
         self.api = tweepy.API(self.auth)
 
-    def read_status(self, username):
+    def read_status(self, username): #TODO investigate streaming API calls for this
         user_tweets = self.api.user_timeline(id=username, count=1)
         for tweet in user_tweets:
             return tweet.id
@@ -48,6 +50,12 @@ class Twinterface(object):
         twitter_url = self.get_tweet_url(username)
 
         data = DB(username=username, tweet_ID=tweet_ID, twitter_url=twitter_url)
+
+        if self.config.check_tables() is True:
+            print("Tables exist. No need to reconfigure.")
+        else:
+            print("Database needs configured. Configureing database.")
+            self.config.create_tables()
 
         if data.search_tweets(tweet_ID) is False:
             print("############# Time is: ", self.timestamp, ' #############')
