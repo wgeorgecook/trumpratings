@@ -4,10 +4,18 @@ lockfile=/home/vagrant/setup-db.lock
 
 if [ -e "$lockfile" ]; then
     # Reload steps
-    echo "Reload detected"
+    echo "Reload detected - no need to configure DB"
 else
-  sudo cp /home/vagrant/deployment/pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf # configure for trust
-  sudo /etc/init.d/postgresql restart # loads copied file
-  psql -U postgres < deployment/psql_setup.sql # configures the DB
-  touch /home/vagrant/setup-db.lock # Place the lockfile
+
+  # Configure for trust
+  sudo cp /home/vagrant/deployment/pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
+
+  # Loads copied file
+  sudo /etc/init.d/postgresql restart
+
+  # Configures the DB
+  psql -U postgres < deployment/psql_setup.sql
+
+  # Place the lockfile
+  touch /home/vagrant/setup-db.lock
 fi

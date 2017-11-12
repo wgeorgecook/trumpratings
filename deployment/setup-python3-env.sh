@@ -21,7 +21,7 @@ else
     /home/vagrant/python3_env/bin/pip install -r /home/vagrant/deployment/requirements.txt
 
     # Make this env activate on log in
-    echo "source ~/python3_env/bin/activate" >> ~/.profile
+    echo "source /home/vagrant/python3_env/bin/activate" >> ~/.profile
 
     # Place the lockfile
     touch /home/vagrant/install-python3.lock

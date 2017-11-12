@@ -25,3 +25,5 @@ class Twitter_info(BaseModel):
     tweet_id = BigIntegerField()
     date_posted = CharField(max_length=50)
     twitter_url = CharField(max_length=255)
+    approval_num = IntegerField()
+    disapproval_num = IntegerField()

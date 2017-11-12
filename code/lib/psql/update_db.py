@@ -3,6 +3,7 @@ from peewee import *
 from settings import *
 from datetime import datetime
 from lib.psql.models import Twitter_info
+from lib.pollster.ratings_pull import DataRead, CSV_URL
 
 
 
@@ -29,13 +30,19 @@ class DB(object):
 
     """
 
-    def __init__(self, username, tweet_ID, twitter_url):
+    def __init__(self, username, tweet_ID, twitter_url, approval_num, disapproval_num):
+
+        self.reading = DataRead()
+        self.CSV_URL = CSV_URL
 
         self.db = psql_db
         self.username = username
         self.tweet_ID = tweet_ID
         self.date_posted = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         self.twitter_url = twitter_url
+        ratings = self.reading.get_data(CSV_URL)
+        self.approval = ratings[0]
+        self.disapproval = ratings[1]
 
     def open_connection(self):
         self.db.connect()
@@ -55,8 +62,10 @@ class DB(object):
                 name=self.username,
                 tweet_id=self.tweet_ID,
                 date_posted=self.date_posted,
-                twitter_url=self.twitter_url)
-
+                twitter_url=self.twitter_url,
+                approval_num = self.approval,
+                disapproval_num = self.disapproval
+            )
             posting.save()
 
             self.close_connection()
@@ -66,6 +75,7 @@ class DB(object):
             if Twitter_info.get(Twitter_info.tweet_id == tweet_ID):
                 return True
                 self.close_connection()
+
         except:
             return False
             self.close_connection()

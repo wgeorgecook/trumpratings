@@ -62,8 +62,8 @@ class DataRead(object):
             approval = int(approve_gallup.approve)
             disapproval = int(disapprove_gallup.disapprove)
             print(approval_is.format(approval), disapproval_is.format(disapproval))
-            return approval
-            return disapproval
+            return [approval, disapproval]
+
         except TypeError:
             try:
                 approve_gallup = (df.query(approval_string.format(yesterday_date)))

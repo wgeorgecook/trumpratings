@@ -45,11 +45,14 @@ class Twinterface(object):
         return tweet_url
 
     def update_status(self, username, CSV_URL):
+        ratings = self.reading.get_data(CSV_URL)
 
         tweet_ID = self.get_tweet_id(username)
         twitter_url = self.get_tweet_url(username)
+        approval_num = ratings[0]
+        disapproval_num = ratings[1]
 
-        data = DB(username=username, tweet_ID=tweet_ID, twitter_url=twitter_url)
+        data = DB(username=username, tweet_ID=tweet_ID, twitter_url=twitter_url, approval_num=approval_num, disapproval_num=disapproval_num)
 
         if self.config.check_tables() is True:
             print("Tables exist. No need to reconfigure.")
