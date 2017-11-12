@@ -1,6 +1,7 @@
 # run sql configuration script
 
-lockfile=/home/vagrant/setup-db.lock
+# lockfile=/home/vagrant/setup-db.lock
+lockfile=~/setup-db.lock
 
 if [ -e "$lockfile" ]; then
     # Reload steps
@@ -17,5 +18,6 @@ else
   psql -U postgres < deployment/psql_setup.sql
 
   # Place the lockfile
-  touch /home/vagrant/setup-db.lock
+  # touch /home/vagrant/setup-db.lock
+  touch ~/setup-db.lock
 fi
