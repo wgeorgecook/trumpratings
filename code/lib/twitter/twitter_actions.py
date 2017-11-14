@@ -28,31 +28,32 @@ class Twinterface(object):
         self.config = MakeDB()
         self.api = tweepy.API(self.auth)
 
+
     def read_status(self, username): #TODO investigate streaming API calls for this
         user_tweets = self.api.user_timeline(id=username, count=1)
         for tweet in user_tweets:
-            return tweet.id
+            return [tweet.id, tweet.text]
 
     def get_tweet_id(self, username):
-        tweet_ID = self.read_status(username)
+        tweet_ID = self.read_status(username)[0]
         return tweet_ID
 
 
     def get_tweet_url(self, username):
-        tweetID = self.read_status(username)
+        tweetID = self.read_status(username)[0]
         tweet_url = "https://twitter.com/{0}/status/{1}".format(username, tweetID)
         self.get_tweet_id(username)
         return tweet_url
 
     def update_status(self, username, CSV_URL):
-        ratings = self.reading.get_data(CSV_URL)
-
+        ratings_list = self.reading.get_data(CSV_URL)
         tweet_ID = self.get_tweet_id(username)
         twitter_url = self.get_tweet_url(username)
-        approval_num = ratings[0]
-        disapproval_num = ratings[1]
+        tweet_text = self.read_status(username)[1]
+        approval_num = ratings_list[0]
+        disapproval_num = ratings_list[1]
 
-        data = DB(username=username, tweet_ID=tweet_ID, twitter_url=twitter_url, approval_num=approval_num, disapproval_num=disapproval_num)
+        data = DB(username=username, tweet_ID=tweet_ID, twitter_url=twitter_url, tweet_text=tweet_text, approval_num=approval_num, disapproval_num=disapproval_num)
 
         if self.config.check_tables() is True:
             print("Tables exist. No need to reconfigure.")
@@ -62,11 +63,11 @@ class Twinterface(object):
 
         if data.search_tweets(tweet_ID) is False:
             print("############# Time is: ", self.timestamp, ' #############')
-            ratings = self.reading.get_data(CSV_URL)
-            approve = ratings[0]
-            disapprove = ratings[1]
+           # ratings = self.reading.get_data(CSV_URL)
+            approve = approval_num
+            disapprove = disapproval_num
             tweet = "Latest @realDonaldTrump, @POTUS Gallup approval rating is {0}%. Disapproval rating is {1}%. \n{2} ".format(approve, disapprove, self.get_tweet_url(username))
-            self.api.update_status(tweet)
+            # self.api.update_status(tweet)
             print("Virtual tweet preview:")
             print(tweet)
             print("############# Tweet posted! #############")

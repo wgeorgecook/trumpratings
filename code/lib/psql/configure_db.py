@@ -34,19 +34,19 @@ class MakeDB(object):
                 self.psql_db.close()
         except InternalError:
             self.psql_db.rollback()
-            print("Check_tables error: Connection broken. Transaction rolled back.")
+            print("# Check_tables error: Connection broken. Transaction rolled back. #")
 
     def create_tables(self):
         try:
             if self.check_tables() is True:
-                print("Tables exist. Config not necessary.")
+                print("##### Tables exist. Config not necessary. #####")
                 return True
             else:
-                print("Creating DB tables")
+                print("##### Creating DB tables #####")
                 self.psql_db.create_table(Twitter_info)
                 self.psql_db.close()
-                print("DB configured!")
+                print("##### DB configured! #####")
                 return True
         except InternalError:
             self.psql_db.rollback()
-            print("Create_tables error: Connection broken. Transaction rolled back.")
+            print("## Create_tables error: Connection broken. Transaction rolled back. ##")

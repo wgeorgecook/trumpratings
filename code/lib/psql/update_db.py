@@ -30,7 +30,7 @@ class DB(object):
 
     """
 
-    def __init__(self, username, tweet_ID, twitter_url, approval_num, disapproval_num):
+    def __init__(self, username, tweet_ID, twitter_url, tweet_text, approval_num, disapproval_num):
 
         self.reading = DataRead()
         self.CSV_URL = CSV_URL
@@ -43,6 +43,7 @@ class DB(object):
         ratings = self.reading.get_data(CSV_URL)
         self.approval = ratings[0]
         self.disapproval = ratings[1]
+        self.tweet_text = tweet_text
 
     def open_connection(self):
         self.db.connect()
@@ -63,6 +64,7 @@ class DB(object):
                 tweet_id=self.tweet_ID,
                 date_posted=self.date_posted,
                 twitter_url=self.twitter_url,
+                tweet_text=self.tweet_text,
                 approval_num = self.approval,
                 disapproval_num = self.disapproval
             )
