@@ -15,3 +15,6 @@ python3_env
 .ipython
 .pip
 .selected_editor
+*.xml
+.idea
+setup-py3-vagrant.sh

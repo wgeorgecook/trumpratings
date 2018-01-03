@@ -48,7 +48,7 @@ class DataRead(object):
         three_days_date = three_days.strftime("%m/%-d/%Y")
 
         four_days = date.today() - timedelta(4)
-        four_days_date = three_days.strftime("%m/%-d/%Y")
+        four_days_date = four_days.strftime("%m/%-d/%Y")
         # End timestamp variables
 
         # Try/except blocks will go back in time a day at a time
