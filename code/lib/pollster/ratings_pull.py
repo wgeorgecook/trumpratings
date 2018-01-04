@@ -60,7 +60,7 @@ class DataRead(object):
         seven_days_date = seven_days.strftime("%m/%-d/%Y")
 
         eight_days = date.today() - timedelta(8)
-        eight_days_date = four_days.strftime("%m/%-d/%Y")
+        eight_days_date = eight_days.strftime("%m/%-d/%Y")
         # End timestamp variables
 
         # Try/except blocks will go back in time a day at a time
