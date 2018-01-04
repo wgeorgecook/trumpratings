@@ -147,3 +147,6 @@ class DataRead(object):
                                             disapproval = int(disapprove_gallup.disapprove)
                                             print(approval_is.format(approval), disapproval_is.format(disapproval))
                                             return [approval, disapproval]
+
+                                        finally:
+                                            return None
