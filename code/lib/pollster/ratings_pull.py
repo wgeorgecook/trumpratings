@@ -49,6 +49,18 @@ class DataRead(object):
 
         four_days = date.today() - timedelta(4)
         four_days_date = four_days.strftime("%m/%-d/%Y")
+
+        five_days = date.today() - timedelta(5)
+        five_days_date = five_days.strftime("%m/%-d/%Y")
+
+        six_days = date.today() - timedelta(6)
+        six_days_date = six_days.strftime("%m/%-d/%Y")
+
+        seven_days = date.today() - timedelta(7)
+        seven_days_date = seven_days.strftime("%m/%-d/%Y")
+
+        eight_days = date.today() - timedelta(8)
+        eight_days_date = four_days.strftime("%m/%-d/%Y")
         # End timestamp variables
 
         # Try/except blocks will go back in time a day at a time
@@ -92,9 +104,47 @@ class DataRead(object):
                         return [approval, disapproval]
 
                     except TypeError:
-                        approve_gallup = (df.query(approval_string.format(four_days_date)))
-                        disapprove_gallup = (df.query(disapproval_string.format(four_days_date)))
-                        approval = int(approve_gallup.approve)
-                        disapproval = int(disapprove_gallup.disapprove)
-                        print(approval_is.format(approval), disapproval_is.format(disapproval))
-                        return [approval, disapproval]
+                        try:
+                            approve_gallup = (df.query(approval_string.format(four_days_date)))
+                            disapprove_gallup = (df.query(disapproval_string.format(four_days_date)))
+                            approval = int(approve_gallup.approve)
+                            disapproval = int(disapprove_gallup.disapprove)
+                            print(approval_is.format(approval), disapproval_is.format(disapproval))
+                            return [approval, disapproval]
+
+                        except TypeError:
+                            try:
+                                approve_gallup = (df.query(approval_string.format(five_days_date)))
+                                disapprove_gallup = (df.query(disapproval_string.format(five_days_date)))
+                                approval = int(approve_gallup.approve)
+                                disapproval = int(disapprove_gallup.disapprove)
+                                print(approval_is.format(approval), disapproval_is.format(disapproval))
+                                return [approval, disapproval]    
+                            
+                            except TypeError:
+                                try:
+                                    approve_gallup = (df.query(approval_string.format(six_days_date)))
+                                    disapprove_gallup = (df.query(disapproval_string.format(six_days_date)))
+                                    approval = int(approve_gallup.approve)
+                                    disapproval = int(disapprove_gallup.disapprove)
+                                    print(approval_is.format(approval), disapproval_is.format(disapproval))
+                                    return [approval, disapproval]
+
+                                except TypeError:
+                                    try:
+                                        approve_gallup = (df.query(approval_string.format(seven_days_date)))
+                                        disapprove_gallup = (df.query(disapproval_string.format(seven_days_date)))
+                                        approval = int(approve_gallup.approve)
+                                        disapproval = int(disapprove_gallup.disapprove)
+                                        print(approval_is.format(approval), disapproval_is.format(disapproval))
+                                        return [approval, disapproval]
+
+                                    except TypeError:
+                                        try:
+                                            approve_gallup = (df.query(approval_string.format(eight_days_date)))
+                                            disapprove_gallup = (df.query(disapproval_string.format(eight_days_date)))
+                                            approval = int(approve_gallup.approve)
+                                            disapproval = int(disapprove_gallup.disapprove)
+                                            print(approval_is.format(approval), disapproval_is.format(disapproval))
+                                            return [approval, disapproval]
+                                        
