@@ -150,4 +150,4 @@ class DataRead(object):
 
                                         finally:
                                             print("Cannot gather data at this time. Exiting.")
-                                            exit 2
+                                            exit
