@@ -36,31 +36,31 @@ class DataRead(object):
 
         # Timestamp variables
         today = date.today()
-        today_date = today.strftime("%m/%-d/%Y")
+        today_date = today.strftime("%-m/%-d/%Y")
 
         yesterday = date.today() - timedelta(1)
-        yesterday_date = yesterday.strftime("%m/%-d/%Y")
+        yesterday_date = yesterday.strftime("%-m/%-d/%Y")
 
         two_days = date.today() - timedelta(2)
-        two_days_date = two_days.strftime("%m/%-d/%Y")
+        two_days_date = two_days.strftime("%-m/%-d/%Y")
 
         three_days = date.today() - timedelta(3)
-        three_days_date = three_days.strftime("%m/%-d/%Y")
+        three_days_date = three_days.strftime("%-m/%-d/%Y")
 
         four_days = date.today() - timedelta(4)
-        four_days_date = four_days.strftime("%m/%-d/%Y")
+        four_days_date = four_days.strftime("%-m/%-d/%Y")
 
         five_days = date.today() - timedelta(5)
-        five_days_date = five_days.strftime("%m/%-d/%Y")
+        five_days_date = five_days.strftime("%-m/%-d/%Y")
 
         six_days = date.today() - timedelta(6)
-        six_days_date = six_days.strftime("%m/%-d/%Y")
+        six_days_date = six_days.strftime("%-m/%-d/%Y")
 
         seven_days = date.today() - timedelta(7)
-        seven_days_date = seven_days.strftime("%m/%-d/%Y")
+        seven_days_date = seven_days.strftime("%-m/%-d/%Y")
 
         eight_days = date.today() - timedelta(8)
-        eight_days_date = eight_days.strftime("%m/%-d/%Y")
+        eight_days_date = eight_days.strftime("%-m/%-d/%Y")
         # End timestamp variables
 
         # Try/except blocks will go back in time a day at a time
