@@ -9,7 +9,7 @@ CONSUMER_SETTINGS = {
 
 
 ACCESS_SETTINGS = {
-    "access_token": "YOUR KEY,
+    "access_token": "YOUR KEY",
     "access_secret": "YOUR KEY",
     }
 
