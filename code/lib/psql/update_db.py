@@ -4,7 +4,6 @@ from settings import *
 from datetime import datetime
 from lib.psql.models import Twitter_info
 from lib.web_scraper.scrape import GetRatings
-# from lib.pollster.ratings_pull import DataRead, CSV_URL
 
 
 

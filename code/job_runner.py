@@ -1,7 +1,5 @@
 # Runs the Python job
 
-
-# from lib.pollster.ratings_pull import CSV_URL
 from settings import TWITTER_SETTINGS
 from lib.twitter.twitter_actions import Twinterface
 
