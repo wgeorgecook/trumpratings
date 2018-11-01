@@ -2,4 +2,4 @@ ipython==6.2.1
 tweepy==3.5.0
 peewee==2.10.1
 psycopg2==2.7.3.2
-# pandas==0.21.0 needs installed manually right now
+lxml==4.2.5

@@ -1,7 +1,5 @@
-# All the tweepy stuff
-
 import tweepy
-from lib.pollster.ratings_pull import DataRead, CSV_URL
+from lib.web_scraper.scrape import GetRatings
 from datetime import datetime
 from settings import *
 from lib.psql.update_db import DB
@@ -23,10 +21,9 @@ class Twinterface(object):
         self.auth.set_access_token(ACCESS_SETTINGS.get('access_token'), ACCESS_SETTINGS.get('access_secret'))
         self.tweeter = TWITTER_SETTINGS.get('username')
         self.timestamp = datetime.now().strftime("%m/%d/%Y %H:%M")
-        self.CSV_URL = CSV_URL
-        self.reading = DataRead()
         self.config = MakeDB()
         self.api = tweepy.API(self.auth)
+        self.ratings = GetRatings()
 
 
     def read_status(self, username): #TODO investigate streaming API calls for this
@@ -45,8 +42,8 @@ class Twinterface(object):
         self.get_tweet_id(username)
         return tweet_url
 
-    def update_status(self, username, CSV_URL):
-        ratings_list = self.reading.get_data(CSV_URL)
+    def update_status(self, username):
+        ratings_list = self.ratings.scrape_page()
         tweet_ID = self.get_tweet_id(username)
         twitter_url = self.get_tweet_url(username)
         tweet_text = self.read_status(username)[1]
@@ -63,7 +60,6 @@ class Twinterface(object):
 
         if data.search_tweets(tweet_ID) is False:
             print("############# Time is: ", self.timestamp, ' #############')
-           # ratings = self.reading.get_data(CSV_URL)
             approve = approval_num
             disapprove = disapproval_num
             tweet = "Latest @realDonaldTrump, @POTUS Gallup approval rating is {0}%. Disapproval rating is {1}%. \n{2} ".format(approve, disapprove, self.get_tweet_url(username))
