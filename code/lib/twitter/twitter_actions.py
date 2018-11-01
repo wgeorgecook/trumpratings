@@ -24,8 +24,8 @@ class Twinterface(object):
         self.auth.set_access_token(ACCESS_SETTINGS.get('access_token'), ACCESS_SETTINGS.get('access_secret'))
         self.tweeter = TWITTER_SETTINGS.get('username')
         self.timestamp = datetime.now().strftime("%m/%d/%Y %H:%M")
-        self.CSV_URL = CSV_URL
-        self.reading = DataRead()
+        # self.CSV_URL = CSV_URL
+        # self.reading = DataRead()
         self.config = MakeDB()
         self.api = tweepy.API(self.auth)
         self.ratings = GetRatings()
@@ -47,7 +47,7 @@ class Twinterface(object):
         self.get_tweet_id(username)
         return tweet_url
 
-    def update_status(self, username, CSV_URL):
+    def update_status(self, username):
         ratings_list = self.ratings.scrape_page()
         tweet_ID = self.get_tweet_id(username)
         twitter_url = self.get_tweet_url(username)
