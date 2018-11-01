@@ -3,4 +3,3 @@ tweepy==3.5.0
 peewee==2.10.1
 psycopg2==2.7.3.2
 lxml==4.2.5
-# pandas==0.21.0 needs installed manually right now
