@@ -10,4 +10,4 @@ tweeting = Twinterface()
 tweeter = TWITTER_SETTINGS.get('username')
 
 
-tweeting.update_status(tweeter, CSV_URL)
+tweeting.update_status(tweeter)
