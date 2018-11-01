@@ -1,4 +1,3 @@
-#!/home/vagrant/python3_env/bin/python3
 # Runs the Python job
 
 
