@@ -9,10 +9,10 @@ vagrant_dir="/home/vagrant/"
 if [ -e "$vagrant_dir" ]; then
     echo "################################"
     echo "#   Vagrant detected.          #"
-    echo "#   Running setup-py3-vagrant  #" 
+    echo "#   Running setup-py3-vagrant  #"
     echo "#   provisioner shell script.  #"
     echo "################################"
-    
+
     # Vagrant script below
     lockfile=/home/vagrant/install-python3.lock
 
@@ -24,7 +24,6 @@ if [ -e "$vagrant_dir" ]; then
         # Cat-ing out the requirements txt to make sure it's populated
         echo "Packages to be installed:"
         cat /home/vagrant/deployment/requirements.txt
-        sleep 10
 
 
         # Run pip install on requirements to pick up new packages
@@ -36,7 +35,6 @@ if [ -e "$vagrant_dir" ]; then
         # Cat-ing out the requirements txt to make sure it's populated
         echo "Packages to be installed:"
         cat /home/vagrant/deployment/requirements.txt
-        sleep 5
 
         # Upgrade pip
         /home/vagrant/python3_env/bin/pip install --upgrade
