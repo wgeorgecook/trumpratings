@@ -13,9 +13,11 @@ class GetRatings(object) :
 
     def scrape_page(self):
 
-        # The tree spits out an array. We need the first index.
+        # Xpaths for approval and disapproval text values. These should not change.
         raw_disapprove = self.tree.xpath('//*[@id="20170130140453"]/div/table/tbody[1]/tr[2]/td[2]/text()')
         raw_approve = self.tree.xpath('//*[@id="20170130140453"]/div/table/tbody[1]/tr[2]/td[1]/text()')
+
+        # The tree spits out an array for each xpath. We need the first index.
         approve = raw_approve[0]
         disapprove = raw_disapprove[0]
 
