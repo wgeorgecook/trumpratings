@@ -33,7 +33,7 @@ def approvals():
     psql_db.connect()
     approval_ratings = Twitter_info.get(Twitter_info.tweet_id == tweet_id)
     psql_db.close()
-    return approval_ratings.twitter_url
+    return jsonify(approval_ratings.approval_num)
 
 @app.route('/api/v1/resources/disapprovals', methods=['GET'])
 def disapprovals():
@@ -44,14 +44,7 @@ def disapprovals():
     psql_db.connect()
     disapproval_ratings = Twitter_info.get(Twitter_info.tweet_id == tweet_id)
     psql_db.close()
-    return "<h1>Tweet: {}".format(disapproval_ratings.twitter_url)
-
-@app.route('/api/v1/resources/all', methods=['GET'])
-def get_all():
-    psql_db.connect()
-    all_ratings = Twitter_info.select("*")
-    psql_db.close()
-    return all_ratings
+    return jsonify(disapproval_ratings.disapproval_num)
 
 app.run(host="0.0.0.0")
 # 1060022696703070208
