@@ -25,19 +25,26 @@ def home():
     return "Some tweets!"
 
 @app.route('/api/v1/resources/approvals', methods=['GET'])
-def approvals(tweet_id):
+def approvals():
+    if 'id' in request.args:
+        tweet_id = int(request.args['id'])
+    else:
+        return "<h1>Please specify a tweet id</h1>"
     psql_db.connect()
     approval_ratings = Twitter_info.get(Twitter_info.tweet_id == tweet_id)
     psql_db.close()
     return approval_ratings.twitter_url
 
 @app.route('/api/v1/resources/disapprovals', methods=['GET'])
-def disapprovals(tweet_id):
+def disapprovals():
+    if 'id' in request.args:
+        tweet_id = int(request.args['id'])
+    else:
+        return "<h1>Please specify a tweet id</h1>"
     psql_db.connect()
     disapproval_ratings = Twitter_info.get(Twitter_info.tweet_id == tweet_id)
     psql_db.close()
-    print(disapproval_ratings.tweet_id)
-    return disapproval_ratings.twitter_url
+    return "<h1>Tweet: {}".format(disapproval_ratings.twitter_url)
 
 @app.route('/api/v1/resources/all', methods=['GET'])
 def get_all():
@@ -47,4 +54,4 @@ def get_all():
     return all_ratings
 
 app.run(host="0.0.0.0")
-# 1059897349005283334
+# 1060022696703070208
