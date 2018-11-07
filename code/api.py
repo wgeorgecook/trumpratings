@@ -52,9 +52,8 @@ def all_ratings():
     psql_db.connect()
     all_ratings = Twitter_info.select()
     for result in all_ratings:
-        results.update({'tweet_id':result.tweet_id, 'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text})
+        results.update({result.tweet_id: {'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text}})
     psql_db.close()
     return jsonify(results)
 
 app.run(host="0.0.0.0")
-# 1060022696703070208
