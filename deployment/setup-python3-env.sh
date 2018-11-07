@@ -76,5 +76,3 @@ else
     touch ~/install-python3.lock
     echo "Python 3 setup complete"
 fi
-
-echo "Pandas needs to manually be installed for the time being."
