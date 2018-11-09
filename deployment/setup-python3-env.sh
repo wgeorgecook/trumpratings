@@ -3,13 +3,13 @@
 # Check for the lock file, if it exists, we know this vagrant VM has already been
 # provisioned and we simply want to reload everything
 # lockfile=/home/vagrant/install-python3.lock
-lockfile=~/install-python3.lock
+lockfile=/home/vagrant/install-python3.lock
 vagrant_dir="/home/vagrant/"
 
 if [ -e "$vagrant_dir" ]; then
     echo "################################"
     echo "#   Vagrant detected.          #"
-    echo "#   Running setup-py3-vagrant  #"
+    echo "#   Running setup-py3-env      #"
     echo "#   provisioner shell script.  #"
     echo "################################"
 
@@ -37,13 +37,13 @@ if [ -e "$vagrant_dir" ]; then
         cat /home/vagrant/deployment/requirements.txt
 
         # Upgrade pip
-        /home/vagrant/python3_env/bin/pip install --upgrade
+        /home/vagrant/python3_env/bin/pip install --upgrade pip
 
         # Pip install the requirements
-        /home/vagrant/python3_env/bin/pip install -Ur /home/vagrant/deployment/requirements.txt
+        /home/vagrant/python3_env/bin/pip install -r /home/vagrant/deployment/requirements.txt
 
         # Make this env activate on log in
-        echo "source ~/python3_env/bin/activate" >> ~/.profile
+        echo "source ~/python3_env/bin/activate" >> /home/vagrant/.profile
 
         # Place the lockfile
         touch /home/vagrant/install-python3.lock
@@ -76,5 +76,3 @@ else
     touch ~/install-python3.lock
     echo "Python 3 setup complete"
 fi
-
-echo "Pandas needs to manually be installed for the time being."
