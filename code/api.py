@@ -56,5 +56,5 @@ def all_ratings():
     psql_db.close()
     return jsonify(results)
 
-# app.run(host="0.0.0.0") # vagrant
-app.run()
+if __name__ == '__main__':
+    app.run(host="0.0.0.0") # vagrant
