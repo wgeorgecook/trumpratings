@@ -1,7 +1,7 @@
 import tweepy
 from code.lib.web_scraper.scrape import GetRatings
 from datetime import datetime
-from settings import *
+from code.settings import *
 from code.lib.psql.update_db import DB
 from code.lib.psql.configure_db import MakeDB
 
