@@ -4,3 +4,4 @@ peewee==2.10.1
 psycopg2==2.7.3.2
 lxml==4.2.5
 flask
+flask_cors
