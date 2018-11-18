@@ -1,6 +1,6 @@
 # Uses PeeWee to update DB with Twitter IDs
 from peewee import *
-from settings import *
+from code.settings import *
 from datetime import datetime
 from code.lib.psql.models import Twitter_info
 from code.lib.web_scraper.scrape import GetRatings
