@@ -6,4 +6,4 @@ exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__fi
 logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0,"/var/www/trumpratings")
 
-from trumpratings import app as application
+from code import app as application
