@@ -1,1 +1,1 @@
-*/15 * * * * /home/vagrant/python3_env/bin/python3 /home/vagrant/code/job_runner.py >> /home/vagrant/logs/cronlog.log 2>&1
+*/15 * * * * /var/www/trumpratings/python3_env/bin/python3 /var/www/trumpratings/code/job_runner.py >> /home/vagrant/logs/cronlog.log 2>&1
