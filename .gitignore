@@ -18,4 +18,4 @@ python3_env
 *.xml
 .idea
 setup-py3-vagrant.sh
-settings.pyc
+*.pyc
