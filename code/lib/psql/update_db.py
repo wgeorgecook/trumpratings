@@ -2,8 +2,8 @@
 from peewee import *
 from settings import *
 from datetime import datetime
-from lib.psql.models import Twitter_info
-from lib.web_scraper.scrape import GetRatings
+from code.lib.psql.models import Twitter_info
+from code.lib.web_scraper.scrape import GetRatings
 
 
 

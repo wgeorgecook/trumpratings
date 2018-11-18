@@ -2,8 +2,8 @@
 
 
 from peewee import *
-from lib.psql.models import Twitter_info
-from settings import DB_SETTINGS
+from code.lib.psql.models import Twitter_info
+from code.settings import DB_SETTINGS
 
 
 class MakeDB(object):
