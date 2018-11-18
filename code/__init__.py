@@ -2,8 +2,8 @@ import flask
 from flask_cors import CORS
 from flask import request, jsonify, Response, json
 from peewee import PostgresqlDatabase
-from lib.psql.models import Twitter_info
-from settings import DB_SETTINGS
+from code.lib.psql.models import Twitter_info
+from code.settings import DB_SETTINGS
 
 dbconnection = DB_SETTINGS.get('db')
 dbuser = DB_SETTINGS.get('user')

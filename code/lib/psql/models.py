@@ -1,6 +1,6 @@
 # DB Models
 from peewee import *
-from settings import *
+from code.settings import *
 
 
 dbconnection = DB_SETTINGS.get('db')
