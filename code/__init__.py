@@ -1,5 +1,6 @@
 import flask
-from flask import request, jsonify
+from flask_cors import CORS
+from flask import request, jsonify, Response, json
 from peewee import PostgresqlDatabase
 from lib.psql.models import Twitter_info
 from settings import DB_SETTINGS
@@ -18,7 +19,18 @@ psql_db = PostgresqlDatabase(
 
 
 app = flask.Flask(__name__)
+CORS(app)
 app.config["DEBUG"] = True
+
+def custom_response(res):
+  """
+  Custom Response Function
+  """
+  return Response(
+    mimetype="application/json",
+    response=json.dumps(res.__dict__),
+    status=200
+  )
 
 @app.route("/", methods=['GET'])
 def home():
@@ -48,11 +60,12 @@ def disapprovals():
 
 @app.route('/api/v1/resources/all', methods=['GET'])
 def all_ratings():
-    results = {}
+    results = []
     psql_db.connect()
     all_ratings = Twitter_info.select()
     for result in all_ratings:
-        results.update({result.tweet_id: {'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text}})
+        results.append(
+            {'tweet_id': result.tweet_id, 'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text})
     psql_db.close()
     return jsonify(results)
 
