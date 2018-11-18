@@ -5,6 +5,7 @@
 # lockfile=/home/vagrant/install-python3.lock
 lockfile=/home/vagrant/install-python3.lock
 vagrant_dir="/home/vagrant/"
+trump_dir="/var/www/trumpratings"
 
 if [ -e "$vagrant_dir" ]; then
     echo "################################"
@@ -60,19 +61,24 @@ elif [ -e "$lockfile" ]; then
     # Run pip install on requirements to pick up new packages
     ~/python3_env/bin/pip install -r ~/deployment/requirements.txt
 else
+    # Check for www pathway
+    if [ ! -d "$trump_dir" ]; then
+        mkdir /var/www/trumpratings
+    fi
+
     # Setup the env
-    virtualenv -p /usr/bin/python3  ~/python3_env
+    virtualenv -p /usr/bin/python3  /var/www/trumpratings/python3_env
 
     # Upgrade pip
-    ~/python3_env/bin/pip install --upgrade
+    /var/www/trumpratings/python3_env/bin/pip install --upgrade
 
     # Pip install the requirements
-    ~/python3_env/bin/pip install -r ~/deployment/requirements.txt
+    /var/www/trumpratings/python3_env/bin/pip install -r /var/www/trumpratings/deployment/requirements.txt
 
     # Make this env activate on log in
-    echo "source ~/python3_env/bin/activate" >> ~/.profile
+    echo "source /var/www/trumpratings/python3_env/bin/activate" >> ~/.profile
 
     # Place the lockfile
-    touch ~/install-python3.lock
+    touch /var/www/trumpratings/install-python3.lock
     echo "Python 3 setup complete"
 fi
