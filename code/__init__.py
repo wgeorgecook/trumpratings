@@ -74,11 +74,10 @@ def new_ratings():
     results = []
     psql_db.connect()
     for result in Twitter_info.select().order_by(Twitter_info.tweet_id.desc()):
-
         results.append(
             {'tweet_id': result.tweet_id, 'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text})
     psql_db.close()
-    return jsonify(results)
+    return jsonify(results[:10])
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0") # vagrant
