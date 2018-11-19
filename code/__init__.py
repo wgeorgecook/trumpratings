@@ -73,7 +73,7 @@ def all_ratings():
 def top_ratings():
     results = []
     psql_db.connect()
-    for result in Twitter_info.select().order_by(Twitter_info.date_posted):
+    for result in Twitter_info.select().order_by(Twitter_info.tweet_id):
         results.append(
             {'tweet_id': result.tweet_id, 'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text})
     psql_db.close()
