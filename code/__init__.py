@@ -69,7 +69,7 @@ def all_ratings():
     psql_db.close()
     return jsonify(results)
 
-@app.route('/api/v1/resources/newest10', methods=['GET'])
+@app.route('/api/v1/resources/latest', methods=['GET'])
 def new_ratings():
     results = []
     psql_db.connect()
