@@ -34,7 +34,8 @@ def custom_response(res):
 
 @app.route("/", methods=['GET'])
 def home():
-    return "Some tweets!"
+    return """ <h1>This is the root of the Trumpratings API endpoint.</h1><h3>Please read the documentation to access data.</3>
+    """
 
 @app.route('/api/v1/resources/approvals', methods=['GET'])
 def approvals():
