@@ -62,7 +62,7 @@ def disapprovals():
 def all_ratings():
     results = []
     psql_db.connect()
-    all_ratings = Twitter_info.select()
+    all_ratings = Twitter_info.select().order_by(Twitter_info.tweet_id.desc())
     for result in all_ratings:
         results.append(
             {'tweet_id': result.tweet_id, 'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text})
