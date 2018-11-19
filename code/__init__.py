@@ -70,7 +70,7 @@ def all_ratings():
     return jsonify(results)
 
 @app.route('/api/v1/resources/top10', methods=['GET'])
-def all_ratings():
+def top_ratings():
     results = []
     psql_db.connect()
     for result in Twitter_info.select().order_by(result.posted_date):
