@@ -15,7 +15,7 @@ else
   sudo /etc/init.d/postgresql restart
 
   # Configures the DB
-  psql -U postgres < deployment/psql_setup.sql
+  psql -U postgres < trumpratings/deployment/psql_setup.sql
 
   # Place the lockfile
   # touch /home/vagrant/setup-db.lock
