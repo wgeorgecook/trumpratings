@@ -24,27 +24,27 @@ if [ -e "$vagrant_dir" ]; then
 
         # Cat-ing out the requirements txt to make sure it's populated
         echo "Packages to be installed:"
-        cat /home/vagrant/deployment/requirements.txt
+        cat /home/vagrant/trumpratings/deployment/requirements.txt
 
 
         # Run pip install on requirements to pick up new packages
-        /home/vagrant/python3_env/bin/pip install -Ur /home/vagrant/deployment/requirements.txt
+        /home/vagrant/trumpratings/python3_env/bin/pip install -Ur /home/vagrant/trumpratings/deployment/requirements.txt
     else
         # Setup the env
-        virtualenv -p /usr/bin/python3  /home/vagrant/python3_env
+        virtualenv -p /usr/bin/python3  /home/vagrant/trumpratings/python3_env
 
         # Cat-ing out the requirements txt to make sure it's populated
         echo "Packages to be installed:"
-        cat /home/vagrant/deployment/requirements.txt
+        cat /home/vagrant/trumpratings/deployment/requirements.txt
 
         # Upgrade pip
-        /home/vagrant/python3_env/bin/pip install --upgrade pip
+        /home/vagrant/trumpratings/python3_env/bin/pip install --upgrade pip
 
         # Pip install the requirements
-        /home/vagrant/python3_env/bin/pip install -r /home/vagrant/deployment/requirements.txt
+        /home/vagrant/trumpratings/python3_env/bin/pip install -r /home/vagrant/trumpratings/deployment/requirements.txt
 
         # Make this env activate on log in
-        echo "source ~/python3_env/bin/activate" >> /home/vagrant/.profile
+        echo "source /home/vagrant/trumpratings/python3_env/bin/activate" >> /home/vagrant/.profile
 
         # Place the lockfile
         touch /home/vagrant/install-python3.lock
@@ -59,7 +59,7 @@ elif [ -e "$lockfile" ]; then
     echo "Reload detected, refreshing env"
 
     # Run pip install on requirements to pick up new packages
-    ~/python3_env/bin/pip install -r ~/deployment/requirements.txt
+    ~/trumpratings/python3_env/bin/pip install -r ~/trumpratings/deployment/requirements.txt
 else
     # Check for www pathway
     if [ ! -d "$trump_dir" ]; then
