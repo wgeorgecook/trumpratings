@@ -9,7 +9,7 @@ if [ -e "$lockfile" ]; then
 else
 
   # Configure for trust
-  sudo cp /home/vagrant/deployment/pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
+  sudo cp /home/vagrant/trumpratings/deployment/pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 
   # Loads copied file
   sudo /etc/init.d/postgresql restart
