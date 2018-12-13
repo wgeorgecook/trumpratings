@@ -1,5 +1,5 @@
-ipython==6.2.1
-tweepy==3.5.0
-lxml==4.2.5
+ipython
+tweepy
+lxml
 flask
 flask_cors
