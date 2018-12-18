@@ -66,7 +66,7 @@ def all_ratings():
     all_ratings = Twitter_info.select().order_by(Twitter_info.tweet_id.desc())
     for result in all_ratings:
         results.append(
-            {'tweet_id': result.tweet_id, 'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text})
+            {'tweet_id': str(result.tweet_id), 'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text})
     psql_db.close()
     return jsonify(results)
 
@@ -76,7 +76,7 @@ def new_ratings():
     psql_db.connect()
     for result in Twitter_info.select().order_by(Twitter_info.tweet_id.desc()):
         results.append(
-            {'tweet_id': result.tweet_id, 'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text})
+            {'tweet_id': str(result.tweet_id), 'tweet_url': result.twitter_url, 'approval': result.approval_num, 'disapproval': result.disapproval_num, 'date_posted': result.date_posted, 'tweet_text': result.tweet_text})
     psql_db.close()
     return jsonify(results[:10])
 
