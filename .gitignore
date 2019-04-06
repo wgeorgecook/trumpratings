@@ -21,3 +21,4 @@ setup-py3-vagrant.sh
 *.pyc
 app.py
 *.bak
+.vscode/
