@@ -21,7 +21,7 @@ Make a copy of `settings_template.py` and name it `settings.py`. Create a [Twitt
 Relevant tweet info is passed to a PostgreSQL database and checked for previous usage before attempting to post a new tweet that might be duplicate. This database is created via the `deployment/pg_hba.conf` and `psql_setup.sql` files. Make modifications to them if you want your table or columns to have different names, but also update the corresponding values in `settings.py`.
 
 ## TrumpRatings Future
-I know there are many different polling data visualization websites on the internet, but I'd like to make my own. I have data from November 2017 that corresponds to tweets and national events. Perhaps Angular or React would be a good way to display this data. I also notice that a lot of (probably) other bots will retweet and respond to @trumpratings. I wonder what might happen if I gave @trumpratings the ability to respond to engagement.
+TrumpRatings had a front end that displayed embedded tweets with the data appearing next to them. You can find that project [at the TrumpRatings front repo here](https://github.com/wgeorgecook/trumpratings-front). However, as of late June 2019, I repurposed the hardware TrumpRatings was using. Perhaps if Trump wins 2020 TrumpRatings will return. Let's hope however that is not the case.
 
 ## Contributing
 I'd love if you want to help make @TrumpRatings better! If you see an issue or would like to make a new feature, please clone the repo and implement your fix/feature. Submit a pull request with a detailed comment of the bug you fixed or a feature you implemented. Please do local tests and make sure it doesn't break existing features in `master`.
